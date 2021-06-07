@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import FilmCard from '../film-card/film-card';
-import PropTypes, { array } from 'prop-types';
+import PropTypes from 'prop-types';
 
 function MainScreen(props) {
   const { cardsCount, name, date, genre } = props;
@@ -136,7 +137,7 @@ function MainScreen(props) {
           </ul>
 
           <div className="catalog__films-list">
-            {new array(cardsCount).fill().map((i) => <FilmCard key={i} />)}
+            {new Array(cardsCount).fill().map((i) => <FilmCard key={i} />)}
           </div>
 
           <div className="catalog__more">
