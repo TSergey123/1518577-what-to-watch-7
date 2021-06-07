@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
