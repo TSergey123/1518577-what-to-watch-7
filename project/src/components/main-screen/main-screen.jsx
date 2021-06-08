@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
@@ -6,7 +5,7 @@ import PropTypes from 'prop-types';
 function MainScreen(props) {
   const { cardsCount, name, date, genre } = props;
   return (
-    <body>
+    <>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
@@ -48,7 +47,7 @@ function MainScreen(props) {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <a href="#top" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -62,7 +61,7 @@ function MainScreen(props) {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a href="#top" className="user-block__link">Sign out</a>
             </li>
           </ul>
         </header>
@@ -105,39 +104,39 @@ function MainScreen(props) {
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <a href="#top" className="catalog__genres-link">All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="#top" className="catalog__genres-link">Comedies</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <a href="#top" className="catalog__genres-link">Crime</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <a href="#top" className="catalog__genres-link">Documentary</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <a href="#top" className="catalog__genres-link">Dramas</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <a href="#top" className="catalog__genres-link">Horror</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <a href="#top" className="catalog__genres-link">Kids & Family</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <a href="#top" className="catalog__genres-link">Romance</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <a href="#top" className="catalog__genres-link">Sci-Fi</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <a href="#top" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(cardsCount).fill().map((i) => <FilmCard key={i} />)}
+            {new Array(cardsCount).fill().map((i, idx) => <FilmCard key={i} />)}
           </div>
 
           <div className="catalog__more">
@@ -147,7 +146,7 @@ function MainScreen(props) {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <a href="#top" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -159,7 +158,7 @@ function MainScreen(props) {
           </div>
         </footer>
       </div>
-    </body>
+    </>
   );
 }
 
@@ -167,7 +166,7 @@ MainScreen.propTypes = {
   cardsCount: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default MainScreen;
