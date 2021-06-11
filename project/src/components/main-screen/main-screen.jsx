@@ -5,7 +5,7 @@ import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 
 function MainScreen(props) {
-  const { cardsCount, name, date, genre, poster, backPoster } = props;
+  const { films, name, date, genre, poster, backPoster } = props;
   return (
     <>
       <div className="visually-hidden">
@@ -125,7 +125,9 @@ function MainScreen(props) {
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(cardsCount).fill().map((i, idx) => <FilmCard key={i} />)}
+            {films.map((item) => <FilmCard poster={item.poster} name={item.name} key={item.id} />)}
+            {/* {films.map((film) => <FilmCard key={film.id} name={film.name} poster={film.poster}/>)} */}
+            {/* {new Array(cardsCount).fill().map((i, idx) => <FilmCard key={film.id} name={film.name} poster={film.poster} />)} */}
           </div>
 
           <div className="catalog__more">
@@ -148,12 +150,14 @@ function MainScreen(props) {
 }
 
 MainScreen.propTypes = {
-  cardsCount: PropTypes.number.isRequired,
+  // cardsCount: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   backPoster: PropTypes.string.isRequired,
+  films: PropTypes.array.isRequired,
+
 };
 
 export default MainScreen;
