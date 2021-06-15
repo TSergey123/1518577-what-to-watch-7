@@ -1,12 +1,12 @@
 import React from 'react';
-import FilmCard from '../film-card/film-card';
-import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import { films } from '../../const/const';
-// import { CARDS_COUNT } from '../../const/const';
-function MainScreen(props) {
-  const { name, date, genre, poster, backPoster } = props;
+import PropTypes from 'prop-types';
+import FilmCard from '../film-card';
+import FilmDetails from './film-details';
+
+function FilmList(props) {
+  const { cardsCount, name, date, genre, poster, backPoster } = props;
   return (
     <>
       <div className="visually-hidden">
@@ -41,27 +41,21 @@ function MainScreen(props) {
         </svg>
       </div>
 
-      <section className="film-card">
-        <div className="film-card__bg">
-          <img src={backPoster} alt={name} />
-        </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-          <div className="logo">
-            <Logo></Logo>
+      <section className="film-card film-card--full">
+        <div className="film-card__hero">
+          <div className="film-card__bg">
+            <img src={backPoster} alt={name} />
           </div>
 
-          <UserBlock></UserBlock>
-        </header>
+          <h1 className="visually-hidden">WTW</h1>
 
-        <div className="film-card__wrap">
-          <div className="film-card__info">
-            <div className="film-card__poster">
-              <img src={poster} alt={name} width="218" height="327" />
-            </div>
+          <header className="page-header film-card__head">
+            <Logo></Logo>
 
+            <UserBlock></UserBlock>
+          </header>
+
+          <div className="film-card__wrap">
             <div className="film-card__desc">
               <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
@@ -77,68 +71,54 @@ function MainScreen(props) {
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                  <svg viewBox="0 0 18 14" width="18" height="14">
+                    <use xlinkHref="#in-list"></use>
                   </svg>
                   <span>My list</span>
                 </button>
+                <a href="add-review.html" className="btn film-card__button">Add review</a>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="film-card__wrap film-card__translate-top">
+          <div className="film-card__info">
+            <div className="film-card__poster film-card__poster--big">
+              <img src={poster} alt={name} width="218" height="327" />
+            </div>
+
+            <div className="film-card__desc">
+              <nav className="film-nav film-card__nav">
+                <ul className="film-nav__list">
+                  <li className="film-nav__item film-nav__item--active">
+                    <a href="/" className="film-nav__link">Overview</a>
+                  </li>
+                  <li className="film-nav__item">
+                    <a href="/" className="film-nav__link">Details</a>
+                  </li>
+                  <li className="film-nav__item">
+                    <a href="/" className="film-nav__link">Reviews</a>
+                  </li>
+                </ul>
+              </nav>
+              <FilmDetails></FilmDetails>
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#top" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#top" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {films.map((film) => <FilmCard key={film.id} name={film.name} poster={film.poster}/>)}
-            {/* {new Array(CARDS_COUNT).fill().map((i, idx) => <FilmCard key={films.id} name={films.name} poster={films.poster} />)} */}
-          </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            {new Array(cardsCount).fill().map((i, idx) => <FilmCard key={i} />)}
           </div>
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <Logo></Logo>
-          </div>
+          <Logo></Logo>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
@@ -149,15 +129,14 @@ function MainScreen(props) {
   );
 }
 
-MainScreen.propTypes = {
-  // cardsCount: PropTypes.number.isRequired,
+FilmList.propTypes = {
+  cardsCount: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
   backPoster: PropTypes.string.isRequired,
-  // films: PropTypes.array.isRequired,
-
+  poster: PropTypes.string.isRequired,
 };
 
-export default MainScreen;
+
+export default FilmList;
