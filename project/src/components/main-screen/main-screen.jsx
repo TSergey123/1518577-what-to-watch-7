@@ -3,9 +3,10 @@ import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-
+import { films } from '../../const/const';
+// import { CARDS_COUNT } from '../../const/const';
 function MainScreen(props) {
-  const { films, name, date, genre, poster, backPoster } = props;
+  const { name, date, genre, poster, backPoster } = props;
   return (
     <>
       <div className="visually-hidden">
@@ -125,9 +126,8 @@ function MainScreen(props) {
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((item) => <FilmCard poster={item.poster} name={item.name} key={item.id} />)}
-            {/* {films.map((film) => <FilmCard key={film.id} name={film.name} poster={film.poster}/>)} */}
-            {/* {new Array(cardsCount).fill().map((i, idx) => <FilmCard key={film.id} name={film.name} poster={film.poster} />)} */}
+            {films.map((film) => <FilmCard key={film.id} name={film.name} poster={film.poster}/>)}
+            {/* {new Array(CARDS_COUNT).fill().map((i, idx) => <FilmCard key={films.id} name={films.name} poster={films.poster} />)} */}
           </div>
 
           <div className="catalog__more">
@@ -156,7 +156,7 @@ MainScreen.propTypes = {
   date: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   backPoster: PropTypes.string.isRequired,
-  films: PropTypes.array.isRequired,
+  // films: PropTypes.array.isRequired,
 
 };
 

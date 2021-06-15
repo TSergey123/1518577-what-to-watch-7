@@ -22,7 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.ROOT}>
+        <Route exact path={AppRoute.MAIN}>
           <MainScreen
             cardsCount={CARDS_COUNT}
             genre={CardData.GENRE}
@@ -52,7 +52,6 @@ function App() {
             name={CardData.NAME}
             films={moreLikeFilms}
             reviews={reviews}
-
           />
         </Route>
 
