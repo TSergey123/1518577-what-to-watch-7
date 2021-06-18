@@ -3,7 +3,8 @@ import FilmCard from '../film-card/film-card';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import { films } from '../../const/const';
+import { films } from '../../mocks/film';
+
 // import { CARDS_COUNT } from '../../const/const';
 function MainScreen(props) {
   const { name, date, genre, poster, backPoster } = props;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MainScreen from '../main-screen/main-screen';
 import SignInScreen from '../sign-in/sign-in';
 import AddReviewScreen from '../add-review/add-review';
@@ -6,8 +7,9 @@ import FilmScreen from '../film/film';
 import PlayerScreen from '../player/player';
 import MyList from '../my-list/my-list';
 import NotFoundScreen from '../my-list/my-list';
-import { AppRoute, CARDS_COUNT, MY_FILMS_COUNT, myListFilms, moreLikeFilms, reviews } from '../../const/const';
+import { AppRoute, CARDS_COUNT, MY_FILMS_COUNT } from '../../const/const';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { reviews } from '../../mocks/film';
 
 const CardData = {
   GENRE: 'Genre',
@@ -18,12 +20,14 @@ const CardData = {
 };
 
 
-function App() {
+function App(props) {
+  const {films} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <MainScreen
+            films={films}
             cardsCount={CARDS_COUNT}
             genre={CardData.GENRE}
             date={CardData.DATE}
@@ -40,7 +44,7 @@ function App() {
         <Route exact path={AppRoute.MY_LIST}>
           <MyList
             filmsCount={MY_FILMS_COUNT}
-            films={myListFilms}
+            films={films}
           />
         </Route>
 
@@ -50,21 +54,21 @@ function App() {
             filmReviews={false}
             date={CardData.DATE}
             name={CardData.NAME}
-            films={moreLikeFilms}
+            films={films}
             reviews={reviews}
           />
         </Route>
 
-        <Route exact path={AppRoute.FILM}>
-          <FilmScreen />
-        </Route>
-
         <Route exact path={AppRoute.ADD_REVIEW}>
-          <AddReviewScreen />
+          <AddReviewScreen
+            film={films[0]}
+          />
         </Route>
 
         <Route exact path={AppRoute.PlAYER}>
-          <PlayerScreen />
+          <PlayerScreen
+            film={films[0]}
+          />
         </Route>
 
         <Route>
@@ -75,5 +79,9 @@ function App() {
     </BrowserRouter>
   );
 }
+
+App.propTypes = {
+  films: PropTypes.array.isRequired,
+};
 
 export default App;
